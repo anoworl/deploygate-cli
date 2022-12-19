@@ -4,7 +4,7 @@ module DeployGate
       attr_reader :email, :method, :team, :launcher
 
       def initialize(team_id)
-        @email = input_email
+        @email = ENV['FASTLANE_USER'].presence || input_email
         @launcher = Spaceship::Launcher.new @email
         @team = @launcher.select_team(team_id: team_id)
 
