@@ -219,6 +219,11 @@ module DeployGate
 
           begin
             provisioning_profiles = provisioning_prifile.create!(uuid)
+            if (created_profile_path = provisioning_profiles[0]).present? &&
+                (uuid = profile_to_plist(created_profile_path)['UUID']).present?
+
+              ENV["PROVISIONING_PROFILE"] = uuid
+            end
           rescue => e
             puts HighLine.color(I18n.t('xcode.export.create_provisioning.error.failed_to_create.provisioning_profile'), HighLine::RED)
             raise e
