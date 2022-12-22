@@ -46,7 +46,7 @@ module DeployGate
           if udid.nil? && device_name.nil?
             devices = fetch_devices(session.token, owner, bundle_id, member_center)
             select_devices = select_devices(devices)
-            not_device if select_devices.empty?
+            not_device if select_devices.empty? && ENV['FORCE_BUILD'].blank?
 
             register!(select_devices)
           else
