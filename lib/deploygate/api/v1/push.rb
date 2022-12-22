@@ -23,7 +23,7 @@ module DeployGate
                 sprintf(ENDPOINT, target_user),
                 { :file => file ,
                   :message => message,
-                  :distribution_key => distribution_key,
+                  :distribution_name => distribution_key,
                   :disable_notify => disable_notify ? 'yes' : 'no',
                   :dg_command => command || '',
                   :env_ci => env_ci
