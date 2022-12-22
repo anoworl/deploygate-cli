@@ -37,6 +37,10 @@ module DeployGate
 
             results = res['results']
             unless results.nil?
+              if (distribution_url = results.dig(*%w[distribution url])).present?
+                `echo "distribution_url=#{distribution_url}" >> "$GITHUB_OUTPUT"`
+              end
+
               upload_results.merge!({
                   :application_name => results['name'],
                   :owner_name => results['user']['name'],
